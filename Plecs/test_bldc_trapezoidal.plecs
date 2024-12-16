@@ -1,9 +1,9 @@
 Plecs {
-  Name          "bldc_trapezoidal_speed_control"
+  Name          "test_bldc_trapezoidal"
   Version       "4.8"
   CircuitModel  "ContStateSpace"
   StartTime     "0.0"
-  TimeSpan      "1"
+  TimeSpan      "10"
   Timeout       ""
   Solver        "auto"
   MaxStep       "1e-3"
@@ -53,8 +53,8 @@ Plecs {
   ScriptsDialogGeometry ""
   ScriptsDialogSplitterPos "0"
   Schematic {
-    Location      [1920, 37; 3840, 1038]
-    ZoomFactor    1.71498
+    Location      [70, 64; 1920, 1038]
+    ZoomFactor    1.96257
     SliderPosition [0, 0]
     ShowBrowser   off
     BrowserWidth  100
@@ -66,20 +66,20 @@ Plecs {
       Direction     up
       Flipped       off
       LabelPosition south
-      Location      [70, 64; 1920, 1060]
+      Location      [301, 151; 1688, 883]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAB4AAAB/vwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAAKkA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
-"///wAAAGMA////+wAAAAwAVAByAGEAYwBlAHMAAAAAHAAAAf4AAABjAP///wAAAAMAAAc6AAAAV/w"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAABzoAAABEAP///wAABzoAAANoAAAA"
+"///wAAAGMA////+wAAAAwAVAByAGEAYwBlAHMAAAAAHAAAAf4AAABjAP///wAAAAMAAAVrAAAAV/w"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAABWsAAABEAP///wAABWsAAAJgAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
       HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAB"
 "AAAAGQAAAAHAAAAZAAAAAYAAABkAAAACQAAAGQAAAAIAAAAZAAAAAEAAABkAAAAAwAAAGQAAAACAA"
-"AAZAAAAAUAAABkAAAHLAAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADpAAA"
+"AAZAAAAAUAAABkAAAFXQAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADpAAA"
 "AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
 "AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
-"AZDAAAAAQAAAAAAAAPoAAAAABk="
+"AR0AAAAAQAAAAAAAAPoAAAAABk="
       PlotPalettes  "AAAAAQAAAAMAAAABAAAAAwAAAAEC//8u4P//zMwAAAAAAAEC//8AAP///"
 "/8AAAAAAAEC//9PsP////8AAAAAAAMAAAABAAAAAAEAAAAAAQAAAAADAAAAAQAAAAEAAAABAAAAAQ"
 "AAAAEAAAABAAAAAwAAAAEAAAAAAQAAAAABAAAAAAMAAAABQBQAAAAAAAAAAAABQBQAAAAAAAAAAAA"
@@ -415,7 +415,7 @@ Plecs {
       Type          Subsystem
       Name          "Speed controller"
       Show          on
-      Position      [290, 135]
+      Position      [265, 140]
       Direction     up
       Flipped       off
       LabelPosition south
@@ -447,7 +447,7 @@ Plecs {
         Direction     left
       }
       Schematic {
-        Location      [533, 175; 1920, 885]
+        Location      [216, 159; 1603, 869]
         ZoomFactor    2.57013
         SliderPosition [0, 0]
         ShowBrowser   off
@@ -1984,6 +1984,26 @@ Plecs {
             Direction     right
           }
         }
+        Component {
+          Type          Constant
+          Name          "Constant"
+          Show          on
+          Position      [360, 180]
+          Direction     right
+          Flipped       off
+          LabelPosition south
+          Frame         [-10, -10; 10, 10]
+          Parameter {
+            Variable      "Value"
+            Value         "1"
+            Show          off
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "10"
+            Show          off
+          }
+        }
         Connection {
           Type          Signal
           SrcComponent  "Trapezoidal\nphase selector"
@@ -2036,14 +2056,6 @@ Plecs {
         }
         Connection {
           Type          Signal
-          SrcComponent  "Dead Zone"
-          SrcTerminal   2
-          Points        [390, 115]
-          DstComponent  "Product1"
-          DstTerminal   2
-        }
-        Connection {
-          Type          Signal
           SrcComponent  "Sum"
           SrcTerminal   1
           DstComponent  "Dead Zone"
@@ -2055,6 +2067,14 @@ Plecs {
           SrcTerminal   1
           DstComponent  "pulses"
           DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Constant"
+          SrcTerminal   1
+          Points        [385, 180; 385, 185]
+          DstComponent  "Product1"
+          DstTerminal   2
         }
       }
     }
@@ -2155,7 +2175,7 @@ Plecs {
       Type          Step
       Name          "Reference\nSpeed"
       Show          on
-      Position      [135, 115]
+      Position      [60, 120]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -2178,6 +2198,161 @@ Plecs {
         Variable      "DataType"
         Value         "10"
         Show          off
+      }
+    }
+    Component {
+      Type          Scope
+      Name          "Scope1"
+      Show          on
+      Position      [550, 315]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Location      [70, 64; 1920, 1060]
+      State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
+"G0AQQByAGUAYQAAAAAA/////wAAADEA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
+"///wAAAGMA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABjAP///wAAAAMAAAAAAAAAAPw"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAABzoAAAPFAAAA"
+"BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
+"AAAAA=="
+      SavedViews    "AAAAAgAAAAA="
+      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAB"
+"AAAAGQAAAAHAAAAZAAAAAYAAABkAAAACQAAAGQAAAAIAAAAZAAAAAEAAABkAAAAAwAAAGQAAAACAA"
+"AAZAAAAAUAAABkAAAA2gAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADBAAA"
+"AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
+"AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
+"AAZAAAAAQAAAAAAAAPoAAAAABk="
+      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      Axes          "1"
+      TimeRange     "0.0"
+      ScrollingMode "1"
+      SingleTimeAxis "1"
+      Open          "0"
+      Ts            "-1"
+      SampleLimit   "0"
+      XAxisLabel    "Time / s"
+      ShowLegend    "1"
+      Axis {
+        Name          ""
+        AutoScale     1
+        MinValue      0
+        MaxValue      1
+        Signals       {}
+        SignalTypes   [ ]
+        Untangle      0
+        KeepBaseline  off
+        BaselineValue 0
+      }
+      Fourier {
+        SingleXAxis       on
+        AxisLabel         "Frequency / Hz"
+        Scaling           0
+        PhaseDisplay      0
+        ShowFourierLegend off
+        Axis {
+          Name          ""
+          AutoScale     1
+          MinValue      0
+          MaxValue      1
+          Signals       {}
+          Untangle      0
+          KeepBaseline  off
+          BaselineValue 0
+        }
+      }
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm1"
+      Show          on
+      Position      [510, 285]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          DiscreteMean
+      Name          "Discrete\nMean Value"
+      Show          on
+      Position      [545, 400]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "x0"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "ts"
+        Value         "0.001"
+        Show          off
+      }
+      Parameter {
+        Variable      "ns"
+        Value         "100"
+        Show          off
+      }
+    }
+    Component {
+      Type          Scope
+      Name          "Scope2"
+      Show          on
+      Position      [620, 400]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Location      [70, 64; 1920, 1060]
+      State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
+"G0AQQByAGUAYQAAAAAA/////wAAADEA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
+"///wAAAGMA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABjAP///wAAAAMAAAAAAAAAAPw"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAABzoAAAPFAAAA"
+"BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
+"AAAAA=="
+      SavedViews    "AAAAAgAAAAA="
+      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAB"
+"AAAAGQAAAAHAAAAZAAAAAYAAABkAAAACQAAAGQAAAAIAAAAZAAAAAEAAABkAAAAAwAAAGQAAAACAA"
+"AAZAAAAAUAAABkAAAApAAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAACLAAA"
+"AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
+"AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
+"AAZAAAAAQAAAAAAAAPoAAAAABk="
+      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      Axes          "1"
+      TimeRange     "0.0"
+      ScrollingMode "1"
+      SingleTimeAxis "1"
+      Open          "0"
+      Ts            "-1"
+      SampleLimit   "0"
+      XAxisLabel    "Time / s"
+      ShowLegend    "1"
+      Axis {
+        Name          ""
+        AutoScale     1
+        MinValue      0
+        MaxValue      1
+        Signals       {}
+        SignalTypes   [ ]
+        Untangle      0
+        KeepBaseline  off
+        BaselineValue 0
+      }
+      Fourier {
+        SingleXAxis       on
+        AxisLabel         "Frequency / Hz"
+        Scaling           0
+        PhaseDisplay      0
+        ShowFourierLegend off
+        Axis {
+          Name          ""
+          AutoScale     1
+          MinValue      0
+          MaxValue      1
+          Signals       {}
+          Untangle      0
+          KeepBaseline  off
+          BaselineValue 0
+        }
       }
     }
     Connection {
@@ -2275,21 +2450,6 @@ Plecs {
     }
     Connection {
       Type          Wire
-      SrcComponent  "40Vdc"
-      SrcTerminal   2
-      Points        [380, 280; 470, 280]
-      DstComponent  "2-Level\nIGBT\nConv."
-      DstTerminal   6
-    }
-    Connection {
-      Type          Wire
-      SrcComponent  "2-Level\nIGBT\nConv."
-      SrcTerminal   3
-      DstComponent  "3ph Meter"
-      DstTerminal   3
-    }
-    Connection {
-      Type          Wire
       SrcComponent  "2-Level\nIGBT\nConv."
       SrcTerminal   1
       DstComponent  "3ph Meter"
@@ -2300,22 +2460,6 @@ Plecs {
       SrcComponent  "2-Level\nIGBT\nConv."
       SrcTerminal   2
       DstComponent  "3ph Meter"
-      DstTerminal   2
-    }
-    Connection {
-      Type          Signal
-      SrcComponent  "Speed controller"
-      SrcTerminal   3
-      Points        [485, 135]
-      DstComponent  "2-Level\nIGBT\nConv."
-      DstTerminal   4
-    }
-    Connection {
-      Type          Signal
-      SrcComponent  "Angle\nSensor"
-      SrcTerminal   2
-      Points        [755, 295; 755, 350; 195, 350; 195, 155]
-      DstComponent  "Speed controller"
       DstTerminal   2
     }
     Connection {
@@ -2337,7 +2481,7 @@ Plecs {
       Type          Signal
       SrcComponent  "Speed\nSensor"
       SrcTerminal   2
-      Points        [840, 295; 840, 355; 190, 355; 190, 135]
+      Points        [840, 295; 840, 355; 135, 355; 135, 140]
       DstComponent  "Speed controller"
       DstTerminal   1
     }
@@ -2347,6 +2491,74 @@ Plecs {
       SrcTerminal   1
       DstComponent  "Speed\nSensor"
       DstTerminal   3
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "2-Level\nIGBT\nConv."
+      SrcTerminal   3
+      Points        [505, 245]
+      Branch {
+        DstComponent  "3ph Meter"
+        DstTerminal   3
+      }
+      Branch {
+        Points        [510, 245]
+        DstComponent  "Vm1"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "40Vdc"
+      SrcTerminal   2
+      Points        [380, 280; 470, 280]
+      Branch {
+        DstComponent  "2-Level\nIGBT\nConv."
+        DstTerminal   6
+      }
+      Branch {
+        Points        [470, 340; 510, 340]
+        DstComponent  "Vm1"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Speed controller"
+      SrcTerminal   3
+      Points        [485, 140]
+      DstComponent  "2-Level\nIGBT\nConv."
+      DstTerminal   4
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Angle\nSensor"
+      SrcTerminal   2
+      Points        [755, 295; 755, 350; 140, 350; 140, 160]
+      DstComponent  "Speed controller"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Vm1"
+      SrcTerminal   3
+      Points        [560, 285; 560, 300; 515, 300; 515, 315; 520, 315]
+      Branch {
+        DstComponent  "Scope1"
+        DstTerminal   1
+      }
+      Branch {
+        Points        [520, 360; 515, 360]
+        DstComponent  "Discrete\nMean Value"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Discrete\nMean Value"
+      SrcTerminal   2
+      DstComponent  "Scope2"
+      DstTerminal   1
     }
     Annotation {
       Name          "<html><body>\n<p align=\"center\">Trapezoidal speed contr"

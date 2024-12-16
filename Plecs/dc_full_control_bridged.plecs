@@ -62,32 +62,35 @@ Plecs {
       Type          Scope
       Name          "Scope"
       Show          on
-      Position      [1135, 80]
+      Position      [1140, 80]
       Direction     up
       Flipped       off
       LabelPosition south
       Location      [70, 64; 1920, 1060]
-      State         "AAAA/wAAAAD9AAAAAgAAAAEAAAC0AAADDvwCAAAAA/sAAAAQAFoAbwBvA"
+      State         "AAAA/wAAAAD9AAAAAgAAAAEAAAC0AAADRvwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAAKkA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
-"///wAAAGMA////+wAAAAwAVAByAGEAYwBlAHMBAAAAMwAAAw4AAABjAP///wAAAAMAAAc6AAAAsfw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAABzoAAABEAP///wAABoAAAAMOAAAA"
+"///wAAAGMA////+wAAAAwAVAByAGEAYwBlAHMBAAAAMwAAA0YAAABjAP///wAAAAMAAAc6AAAAefw"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAABzoAAABEAP///wAABoAAAANGAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAC"
-"AAAAGQAAAAJAAAAZAAAAAQAAABkAAAABQAAAGQAAAAGAAAAZAAAAAcAAABkAAAAAQAAAGQAAAACAA"
-"AAZAAAAAMAAABkAAAHOgAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADhAAA"
+      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAB"
+"AAAAGQAAAAHAAAAZAAAAAYAAABkAAAACQAAAGQAAAAIAAAAZAAAAAEAAABkAAAAAwAAAGQAAAACAA"
+"AAZAAAAAUAAABkAAAHLAAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADhAAA"
 "AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
 "AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
-"AZZAAAAAQAAAAAAAAPoAAAAABk="
-      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA"
-"AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-"AAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AZLAAAAAQAAAAAAAAPoAAAAABk="
+      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAQAAAAEC//8u4P//zMwAAAAAAAEAAAABAAAAA"
+"AEAAAABAAAAAQAAAAEAAAABAAAAAAEAAAABQBQAAAAAAAAAAAABAAAAAQEAAAABAAAAAQAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAQAAAAEC//8u4P//zMwAAAAAAAEAAAABAAAAAAE"
+"AAAABAAAAAQAAAAEAAAABAAAAAAEAAAABQBQAAAAAAAAAAAABAAAAAQEAAAABAAAAAQAAAAEAAAAB"
+"Av//LuD//8zMAAAAAAABAAAAAQAAAAABAAAAAQAAAAEAAAABAAAAAQAAAAABAAAAAUAUAAAAAAAAA"
+"AAAAQAAAAEB"
       Axes          "4"
       TimeRange     "0"
       ScrollingMode "1"
       SingleTimeAxis "1"
-      Open          "0"
+      Open          "1"
       Ts            "-1"
       SampleLimit   "0"
       XAxisLabel    "Time (s)"
@@ -541,7 +544,7 @@ Plecs {
       }
       Parameter {
         Variable      "After"
-        Value         "5"
+        Value         "150"
         Show          on
       }
       Parameter {
@@ -1109,39 +1112,6 @@ Plecs {
             Show          off
           }
         }
-        Component {
-          Type          Resistor
-          Name          "R1"
-          Show          on
-          Position      [590, 200]
-          Direction     right
-          Flipped       off
-          LabelPosition south
-          Parameter {
-            Variable      "R"
-            Value         "0.001"
-            Show          off
-          }
-        }
-        Component {
-          Type          Capacitor
-          Name          "C1"
-          Show          on
-          Position      [640, 250]
-          Direction     down
-          Flipped       on
-          LabelPosition west
-          Parameter {
-            Variable      "C"
-            Value         "1"
-            Show          off
-          }
-          Parameter {
-            Variable      "v_init"
-            Value         "0"
-            Show          off
-          }
-        }
         Connection {
           Type          Wire
           SrcComponent  "FETD"
@@ -1152,8 +1122,8 @@ Plecs {
             DstTerminal   1
           }
           Branch {
-            DstComponent  "R1"
-            DstTerminal   2
+            DstComponent  "Vm"
+            DstTerminal   1
           }
         }
         Connection {
@@ -1219,28 +1189,7 @@ Plecs {
             DstTerminal   2
           }
           Branch {
-            Points        [640, 310]
-            Branch {
-              DstComponent  "gnd"
-              DstTerminal   1
-            }
-            Branch {
-              DstComponent  "C1"
-              DstTerminal   2
-            }
-          }
-        }
-        Connection {
-          Type          Wire
-          SrcComponent  "R1"
-          SrcTerminal   1
-          Points        [640, 200]
-          Branch {
-            DstComponent  "Vm"
-            DstTerminal   1
-          }
-          Branch {
-            DstComponent  "C1"
+            DstComponent  "gnd"
             DstTerminal   1
           }
         }
@@ -1438,8 +1387,8 @@ Plecs {
       DstTerminal   1
     }
     Annotation {
-      Name          "<html><body>\n<p align=\"center\">DC motor drive with arm"
-"ature chopper circuit </p></body></html>"
+      Name          "<html><body>\n<p align=\"center\">DC motor drive with hal"
+"f bridge</p></body></html>"
       Position      [580, 45]
     } 
   }

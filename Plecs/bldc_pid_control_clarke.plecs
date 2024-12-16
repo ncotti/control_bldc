@@ -53,7 +53,7 @@ Plecs {
   ScriptsDialogGeometry ""
   ScriptsDialogSplitterPos "0"
   Schematic {
-    Location      [70, 64; 1920, 1038]
+    Location      [1920, 37; 3840, 1038]
     ZoomFactor    1.30958
     SliderPosition [0, 0]
     ShowBrowser   off
@@ -2774,7 +2774,7 @@ Plecs {
     Component {
       Type          Reference
       SrcComponent  "Components/Control/Transformations/3ph->SRF"
-      Name          "Clakr Transform"
+      Name          "Clarke Transform"
       Show          on
       Position      [1110, 115]
       Direction     up
@@ -3214,12 +3214,12 @@ Plecs {
       Type          Signal
       SrcComponent  "Mux2"
       SrcTerminal   1
-      DstComponent  "Clakr Transform"
+      DstComponent  "Clarke Transform"
       DstTerminal   1
     }
     Connection {
       Type          Signal
-      SrcComponent  "Clakr Transform"
+      SrcComponent  "Clarke Transform"
       SrcTerminal   2
       DstComponent  "Demux3"
       DstTerminal   1

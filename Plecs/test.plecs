@@ -1,5 +1,5 @@
 Plecs {
-  Name          "bldc_trapezoidal_speed_control"
+  Name          "test"
   Version       "4.8"
   CircuitModel  "ContStateSpace"
   StartTime     "0.0"
@@ -94,7 +94,7 @@ Plecs {
       TimeRange     "0"
       ScrollingMode "1"
       SingleTimeAxis "1"
-      Open          "0"
+      Open          "1"
       Ts            "-1"
       SampleLimit   "0"
       XAxisLabel    "Time / s"
@@ -412,14 +412,136 @@ Plecs {
       }
     }
     Component {
-      Type          Subsystem
-      Name          "Speed controller"
+      Type          Reference
+      SrcComponent  "Components/Electrical/Converters/2-Level\\nIGBT\\nConv."
+      Name          "2-Level\nIGBT\nConv."
       Show          on
-      Position      [290, 135]
+      Position      [470, 235]
+      Direction     down
+      Flipped       on
+      LabelPosition west
+      Frame         [-25, -25; 25, 25]
+      Parameter {
+        Variable      "therm"
+        Value         ""
+        Show          off
+      }
+      Parameter {
+        Variable      "Rth"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "T_init"
+        Value         "0"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [-30, -10]
+        Direction     left
+      }
+      Terminal {
+        Type          Port
+        Position      [-30, 0]
+        Direction     left
+      }
+      Terminal {
+        Type          Port
+        Position      [-30, 10]
+        Direction     left
+      }
+      Terminal {
+        Type          Input
+        Position      [-15, -25]
+        Direction     up
+      }
+      Terminal {
+        Type          Port
+        Position      [0, -30]
+        Direction     up
+      }
+      Terminal {
+        Type          Port
+        Position      [0, 30]
+        Direction     down
+      }
+    }
+    Component {
+      Type          DCVoltageSource
+      Name          "40Vdc"
+      Show          on
+      Position      [380, 235]
+      Direction     down
+      Flipped       on
+      LabelPosition west
+      Parameter {
+        Variable      "V"
+        Value         "40"
+        Show          off
+      }
+    }
+    Component {
+      Type          RotationalSpeedSensor
+      Name          "Speed\nSensor"
+      Show          on
+      Position      [820, 295]
+      Direction     right
+      Flipped       off
+      LabelPosition west
+      Parameter {
+        Variable      "SecondFlange"
+        Value         "2"
+        Show          off
+      }
+    }
+    Component {
+      Type          RotationalReference
+      Name          "Rotational\nFrame1"
+      Show          off
+      Position      [820, 325]
       Direction     up
       Flipped       off
       LabelPosition south
-      Frame         [-60, -30; 60, 30]
+    }
+    Component {
+      Type          Step
+      Name          "Reference\nSpeed"
+      Show          on
+      Position      [135, 135]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Time"
+        Value         "0.5"
+        Show          off
+      }
+      Parameter {
+        Variable      "Before"
+        Value         "15"
+        Show          off
+      }
+      Parameter {
+        Variable      "After"
+        Value         "20"
+        Show          off
+      }
+      Parameter {
+        Variable      "DataType"
+        Value         "10"
+        Show          off
+      }
+    }
+    Component {
+      Type          Subsystem
+      Name          "Current controller"
+      Show          on
+      Position      [280, 135]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Frame         [-35, -30; 35, 30]
       SampleTime    "-1"
       CodeGenDiscretizationMethod "2"
       CodeGenTarget "Generic"
@@ -428,35 +550,35 @@ Plecs {
       MaskIconRotates on
       Terminal {
         Type          Input
-        Position      [-60, 0]
+        Position      [-35, -20]
         Direction     left
       }
       Terminal {
         Type          Input
-        Position      [-60, 20]
+        Position      [-35, 0]
+        Direction     left
+      }
+      Terminal {
+        Type          Input
+        Position      [-35, 20]
         Direction     left
       }
       Terminal {
         Type          Output
-        Position      [64, 0]
+        Position      [39, 0]
         Direction     right
       }
-      Terminal {
-        Type          Input
-        Position      [-60, -20]
-        Direction     left
-      }
       Schematic {
-        Location      [533, 175; 1920, 885]
+        Location      [70, 64; 1920, 1038]
         ZoomFactor    2.57013
         SliderPosition [0, 0]
         ShowBrowser   off
         BrowserWidth  100
         Component {
           Type          Input
-          Name          "speed"
+          Name          "Iabc"
           Show          on
-          Position      [50, 65]
+          Position      [35, 25]
           Direction     right
           Flipped       off
           LabelPosition south
@@ -473,9 +595,9 @@ Plecs {
         }
         Component {
           Type          Input
-          Name          "theta"
+          Name          "Iref"
           Show          on
-          Position      [50, 190]
+          Position      [35, 75]
           Direction     right
           Flipped       off
           LabelPosition south
@@ -491,10 +613,10 @@ Plecs {
           }
         }
         Component {
-          Type          Output
-          Name          "pulses"
+          Type          Input
+          Name          "theta"
           Show          on
-          Position      [495, 190]
+          Position      [40, 130]
           Direction     right
           Flipped       off
           LabelPosition south
@@ -510,10 +632,164 @@ Plecs {
           }
         }
         Component {
+          Type          Output
+          Name          "pulses"
+          Show          on
+          Position      [590, 85]
+          Direction     right
+          Flipped       off
+          LabelPosition south
+          Parameter {
+            Variable      "Index"
+            Value         "4"
+            Show          on
+          }
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Product
+          Name          "Product"
+          Show          on
+          Position      [325, 80]
+          Direction     up
+          Flipped       off
+          LabelPosition south
+          Parameter {
+            Variable      "IconShape"
+            Value         "1"
+            Show          off
+          }
+          Parameter {
+            Variable      "Inputs"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "11"
+            Show          off
+          }
+          Parameter {
+            Variable      "DataTypeOverflowMode"
+            Value         "1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Sum
+          Name          "Sum"
+          Show          on
+          Position      [400, 80]
+          Direction     up
+          Flipped       off
+          LabelPosition south
+          Parameter {
+            Variable      "IconShape"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "Inputs"
+            Value         "-+|"
+            Show          off
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "11"
+            Show          off
+          }
+          Parameter {
+            Variable      "DataTypeOverflowMode"
+            Value         "1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Relay
+          Name          "Relay"
+          Show          on
+          Position      [470, 80]
+          Direction     right
+          Flipped       off
+          LabelPosition south
+          Parameter {
+            Variable      "OnSwitchValue"
+            Value         "0.1"
+            Show          off
+          }
+          Parameter {
+            Variable      "OffSwitchValue"
+            Value         "-0.1"
+            Show          off
+          }
+          Parameter {
+            Variable      "OnOutputValue"
+            Value         "1"
+            Show          off
+          }
+          Parameter {
+            Variable      "OffOutputValue"
+            Value         "-1"
+            Show          off
+          }
+          Parameter {
+            Variable      "InitialState"
+            Value         "1"
+            Show          off
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "10"
+            Show          off
+          }
+        }
+        Component {
+          Type          Product
+          Name          "Product1"
+          Show          off
+          Position      [530, 85]
+          Direction     up
+          Flipped       off
+          LabelPosition south
+          Parameter {
+            Variable      "IconShape"
+            Value         "1"
+            Show          off
+          }
+          Parameter {
+            Variable      "Inputs"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "11"
+            Show          off
+          }
+          Parameter {
+            Variable      "DataTypeOverflowMode"
+            Value         "1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Abs
+          Name          "Abs"
+          Show          on
+          Position      [470, 135]
+          Direction     right
+          Flipped       off
+          LabelPosition south
+        }
+        Component {
           Type          Subsystem
           Name          "Trapezoidal\nphase selector"
           Show          on
-          Position      [155, 195]
+          Position      [150, 135]
           Direction     up
           Flipped       off
           LabelPosition south
@@ -548,7 +824,7 @@ Plecs {
           Schematic {
             Location      [70, 64; 1920, 1038]
             ZoomFactor    1.30957
-            SliderPosition [171, -1]
+            SliderPosition [0, 0]
             ShowBrowser   off
             BrowserWidth  100
             Component {
@@ -1866,7 +2142,7 @@ Plecs {
           Type          SignalMux
           Name          "Mux"
           Show          off
-          Position      [230, 195]
+          Position      [225, 135]
           Direction     right
           Flipped       off
           LabelPosition south
@@ -1876,113 +2152,41 @@ Plecs {
             Show          off
           }
         }
-        Component {
-          Type          Input
-          Name          "desired_speed"
-          Show          on
-          Position      [55, 115]
-          Direction     right
-          Flipped       off
-          LabelPosition south
-          Parameter {
-            Variable      "Index"
-            Value         "4"
-            Show          on
-          }
-          Parameter {
-            Variable      "Width"
-            Value         "-1"
-            Show          off
-          }
+        Connection {
+          Type          Signal
+          SrcComponent  "Iref"
+          SrcTerminal   1
+          DstComponent  "Product"
+          DstTerminal   2
         }
-        Component {
-          Type          Sum
-          Name          "Sum"
-          Show          off
-          Position      [275, 115]
-          Direction     up
-          Flipped       on
-          LabelPosition north
-          Parameter {
-            Variable      "IconShape"
-            Value         "2"
-            Show          off
-          }
-          Parameter {
-            Variable      "Inputs"
-            Value         "|+-"
-            Show          off
-          }
-          Parameter {
-            Variable      "DataType"
-            Value         "11"
-            Show          off
-          }
-          Parameter {
-            Variable      "DataTypeOverflowMode"
-            Value         "1"
-            Show          off
-          }
+        Connection {
+          Type          Signal
+          SrcComponent  "Relay"
+          SrcTerminal   2
+          DstComponent  "Product1"
+          DstTerminal   2
         }
-        Component {
-          Type          Product
-          Name          "Product1"
-          Show          off
-          Position      [420, 190]
-          Direction     up
-          Flipped       off
-          LabelPosition south
-          Parameter {
-            Variable      "IconShape"
-            Value         "1"
-            Show          off
-          }
-          Parameter {
-            Variable      "Inputs"
-            Value         "2"
-            Show          off
-          }
-          Parameter {
-            Variable      "DataType"
-            Value         "11"
-            Show          off
-          }
-          Parameter {
-            Variable      "DataTypeOverflowMode"
-            Value         "1"
-            Show          off
-          }
+        Connection {
+          Type          Signal
+          SrcComponent  "Abs"
+          SrcTerminal   2
+          Points        [495, 135; 495, 90]
+          DstComponent  "Product1"
+          DstTerminal   3
         }
-        Component {
-          Type          Reference
-          SrcComponent  "Components/Control/Discontinuous/Dead Zone"
-          Name          "Dead Zone"
-          Show          on
-          Position      [345, 115]
-          Direction     up
-          Flipped       off
-          LabelPosition south
-          Frame         [-15, -15; 15, 15]
-          Parameter {
-            Variable      "lower"
-            Value         "-0.1"
-            Show          off
-          }
-          Parameter {
-            Variable      "upper"
-            Value         "0.1"
-            Show          off
-          }
-          Terminal {
-            Type          Input
-            Position      [-15, 0]
-            Direction     left
-          }
-          Terminal {
-            Type          Output
-            Position      [19, 0]
-            Direction     right
-          }
+        Connection {
+          Type          Signal
+          SrcComponent  "Sum"
+          SrcTerminal   1
+          DstComponent  "Relay"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Product1"
+          SrcTerminal   1
+          DstComponent  "pulses"
+          DstTerminal   1
         }
         Connection {
           Type          Signal
@@ -2014,170 +2218,48 @@ Plecs {
         }
         Connection {
           Type          Signal
-          SrcComponent  "speed"
-          SrcTerminal   1
-          Points        [275, 65]
-          DstComponent  "Sum"
-          DstTerminal   3
-        }
-        Connection {
-          Type          Signal
           SrcComponent  "Mux"
           SrcTerminal   1
-          DstComponent  "Product1"
+          Points        [270, 135]
+          Branch {
+            Points        [270, 85]
+            DstComponent  "Product"
+            DstTerminal   3
+          }
+          Branch {
+            DstComponent  "Abs"
+            DstTerminal   1
+          }
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Product"
+          SrcTerminal   1
+          DstComponent  "Sum"
           DstTerminal   3
         }
         Connection {
           Type          Signal
-          SrcComponent  "desired_speed"
+          SrcComponent  "Iabc"
           SrcTerminal   1
+          Points        [400, 25]
           DstComponent  "Sum"
           DstTerminal   2
         }
-        Connection {
-          Type          Signal
-          SrcComponent  "Dead Zone"
-          SrcTerminal   2
-          Points        [390, 115]
-          DstComponent  "Product1"
-          DstTerminal   2
-        }
-        Connection {
-          Type          Signal
-          SrcComponent  "Sum"
-          SrcTerminal   1
-          DstComponent  "Dead Zone"
-          DstTerminal   1
-        }
-        Connection {
-          Type          Signal
-          SrcComponent  "Product1"
-          SrcTerminal   1
-          DstComponent  "pulses"
-          DstTerminal   1
-        }
       }
     }
     Component {
-      Type          Reference
-      SrcComponent  "Components/Electrical/Converters/2-Level\\nIGBT\\nConv."
-      Name          "2-Level\nIGBT\nConv."
+      Type          PlecsProbe
+      Name          "Probe1"
       Show          on
-      Position      [470, 235]
-      Direction     down
-      Flipped       on
-      LabelPosition west
-      Frame         [-25, -25; 25, 25]
-      Parameter {
-        Variable      "therm"
-        Value         ""
-        Show          off
-      }
-      Parameter {
-        Variable      "Rth"
-        Value         "0"
-        Show          off
-      }
-      Parameter {
-        Variable      "T_init"
-        Value         "0"
-        Show          off
-      }
-      Terminal {
-        Type          Port
-        Position      [-30, -10]
-        Direction     left
-      }
-      Terminal {
-        Type          Port
-        Position      [-30, 0]
-        Direction     left
-      }
-      Terminal {
-        Type          Port
-        Position      [-30, 10]
-        Direction     left
-      }
-      Terminal {
-        Type          Input
-        Position      [-15, -25]
-        Direction     up
-      }
-      Terminal {
-        Type          Port
-        Position      [0, -30]
-        Direction     up
-      }
-      Terminal {
-        Type          Port
-        Position      [0, 30]
-        Direction     down
-      }
-    }
-    Component {
-      Type          DCVoltageSource
-      Name          "40Vdc"
-      Show          on
-      Position      [380, 235]
-      Direction     down
-      Flipped       on
-      LabelPosition west
-      Parameter {
-        Variable      "V"
-        Value         "40"
-        Show          off
-      }
-    }
-    Component {
-      Type          RotationalSpeedSensor
-      Name          "Speed\nSensor"
-      Show          on
-      Position      [820, 295]
-      Direction     right
-      Flipped       off
-      LabelPosition west
-      Parameter {
-        Variable      "SecondFlange"
-        Value         "2"
-        Show          off
-      }
-    }
-    Component {
-      Type          RotationalReference
-      Name          "Rotational\nFrame1"
-      Show          off
-      Position      [820, 325]
-      Direction     up
-      Flipped       off
-      LabelPosition south
-    }
-    Component {
-      Type          Step
-      Name          "Reference\nSpeed"
-      Show          on
-      Position      [135, 115]
+      Position      [200, 115]
       Direction     right
       Flipped       off
       LabelPosition south
-      Parameter {
-        Variable      "Time"
-        Value         "0.5"
-        Show          off
-      }
-      Parameter {
-        Variable      "Before"
-        Value         "15"
-        Show          off
-      }
-      Parameter {
-        Variable      "After"
-        Value         "20"
-        Show          off
-      }
-      Parameter {
-        Variable      "DataType"
-        Value         "10"
-        Show          off
+      Probe {
+        Component     "BLDC"
+        Path          ""
+        Signals       {"Back EMF"}
       }
     }
     Connection {
@@ -2304,41 +2386,10 @@ Plecs {
     }
     Connection {
       Type          Signal
-      SrcComponent  "Speed controller"
-      SrcTerminal   3
-      Points        [485, 135]
-      DstComponent  "2-Level\nIGBT\nConv."
-      DstTerminal   4
-    }
-    Connection {
-      Type          Signal
-      SrcComponent  "Angle\nSensor"
-      SrcTerminal   2
-      Points        [755, 295; 755, 350; 195, 350; 195, 155]
-      DstComponent  "Speed controller"
-      DstTerminal   2
-    }
-    Connection {
-      Type          Signal
       SrcComponent  "3ph Meter"
       SrcTerminal   8
       Points        [525, 90]
       DstComponent  "Scope"
-      DstTerminal   1
-    }
-    Connection {
-      Type          Signal
-      SrcComponent  "Reference\nSpeed"
-      SrcTerminal   1
-      DstComponent  "Speed controller"
-      DstTerminal   4
-    }
-    Connection {
-      Type          Signal
-      SrcComponent  "Speed\nSensor"
-      SrcTerminal   2
-      Points        [840, 295; 840, 355; 190, 355; 190, 135]
-      DstComponent  "Speed controller"
       DstTerminal   1
     }
     Connection {
@@ -2347,6 +2398,36 @@ Plecs {
       SrcTerminal   1
       DstComponent  "Speed\nSensor"
       DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Reference\nSpeed"
+      SrcTerminal   1
+      DstComponent  "Current controller"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Angle\nSensor"
+      SrcTerminal   2
+      Points        [755, 295; 755, 350; 195, 350; 195, 155]
+      DstComponent  "Current controller"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Current controller"
+      SrcTerminal   4
+      Points        [485, 135]
+      DstComponent  "2-Level\nIGBT\nConv."
+      DstTerminal   4
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Probe1"
+      SrcTerminal   1
+      DstComponent  "Current controller"
+      DstTerminal   1
     }
     Annotation {
       Name          "<html><body>\n<p align=\"center\">Trapezoidal speed contr"

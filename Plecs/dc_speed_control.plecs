@@ -1,9 +1,9 @@
 Plecs {
-  Name          "dc_motor_speed_control"
+  Name          "dc_speed_control"
   Version       "4.8"
   CircuitModel  "ContStateSpace"
   StartTime     "0.0"
-  TimeSpan      "2"
+  TimeSpan      "0.5"
   Timeout       ""
   Solver        "radau"
   MaxStep       "1e-3"
@@ -53,7 +53,7 @@ Plecs {
   ScriptsDialogGeometry ""
   ScriptsDialogSplitterPos "0"
   Schematic {
-    Location      [70, 64; 1920, 1038]
+    Location      [1920, 37; 3840, 1038]
     ZoomFactor    1.96257
     SliderPosition [0, 0]
     ShowBrowser   off
@@ -62,32 +62,36 @@ Plecs {
       Type          Scope
       Name          "Scope"
       Show          on
-      Position      [770, 60]
+      Position      [770, 65]
       Direction     up
       Flipped       off
       LabelPosition south
-      Location      [192, 188; 1579, 1060]
+      Location      [70, 64; 1920, 1060]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAC0AAAB4PwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAAKkA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGMA////+wAAAAwAVAByAGEAYwBlAHMAAAAAHAAAAeAAAABjAP///wAAAAMAAAAAAAAAAPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAABWsAAANJAAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAABzoAAAPFAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
       HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAB"
-"QAAAGQAAAAIAAAAZAAAAAkAAABkAAAAAgAAAGQAAAADAAAAZAAAAAEAAABkAAAABgAAAGQAAAAHAA"
-"AAZAAAAAQAAABkAAAA+gAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADhAAA"
+"AAAAGQAAAAHAAAAZAAAAAYAAABkAAAACQAAAGQAAAAIAAAAZAAAAAEAAABkAAAAAwAAAGQAAAACAA"
+"AAZAAAAAUAAABkAAAA+gAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAADhAAA"
 "AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
 "AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
 "AAZAAAAAQAAAAAAAAPoAAAAABk="
-      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA"
-"AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-"AAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAQAAAAEC//8u4P//zMwAAAAAAAEAAAABAAAAA"
+"AEAAAABAAAAAQAAAAEAAAABAAAAAAEAAAABQBQAAAAAAAAAAAABAAAAAQEAAAABAAAAAQAAAAEAAA"
+"ABAv//LuD//8zMAAAAAAABAAAAAQAAAAABAAAAAQAAAAEAAAABAAAAAQAAAAABAAAAAUAUAAAAAAA"
+"AAAAAAQAAAAEBAAAAAQAAAAEAAAABAAAAAQL//y7g///MzAAAAAAAAQAAAAEAAAAAAQAAAAEAAAAB"
+"AAAAAQAAAAEAAAAAAQAAAAFAFAAAAAAAAAAAAAEAAAABAQAAAAEAAAABAAAAAQAAAAEC//8u4P//z"
+"MwAAAAAAAEAAAABAAAAAAEAAAABAAAAAQAAAAEAAAABAAAAAAEAAAABQBQAAAAAAAAAAAABAAAAAQ"
+"E="
       Axes          "4"
       TimeRange     "0"
       ScrollingMode "1"
       SingleTimeAxis "1"
-      Open          "0"
+      Open          "1"
       Ts            "-1"
       SampleLimit   "0"
       XAxisLabel    "Time (s)"
@@ -434,7 +438,7 @@ Plecs {
       Type          From
       Name          "From"
       Show          off
-      Position      [720, 55]
+      Position      [720, 60]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -453,7 +457,7 @@ Plecs {
       Type          PlecsProbe
       Name          "Te"
       Show          on
-      Position      [685, 75]
+      Position      [685, 80]
       Direction     right
       Flipped       off
       LabelPosition south
@@ -667,7 +671,7 @@ Plecs {
       LabelPosition south
       Parameter {
         Variable      "Time"
-        Value         "1"
+        Value         "0.3"
         Show          on
       }
       Parameter {
@@ -834,7 +838,7 @@ Plecs {
       Type          Signal
       SrcComponent  "Am1"
       SrcTerminal   3
-      Points        [650, 45]
+      Points        [650, 50]
       DstComponent  "Scope"
       DstTerminal   1
     }
@@ -870,7 +874,7 @@ Plecs {
         DstTerminal   3
       }
       Branch {
-        Points        [725, 65]
+        Points        [725, 70]
         DstComponent  "Scope"
         DstTerminal   3
       }
